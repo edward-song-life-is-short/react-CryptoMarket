@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-CryptoMarket/static/css/main.7e2272e6.chunk.css",
-    "main.js": "/react-CryptoMarket/static/js/main.be2170de.chunk.js",
-    "main.js.map": "/react-CryptoMarket/static/js/main.be2170de.chunk.js.map",
+    "main.js": "/react-CryptoMarket/static/js/main.6a3e3115.chunk.js",
+    "main.js.map": "/react-CryptoMarket/static/js/main.6a3e3115.chunk.js.map",
     "runtime-main.js": "/react-CryptoMarket/static/js/runtime-main.701889b2.js",
     "runtime-main.js.map": "/react-CryptoMarket/static/js/runtime-main.701889b2.js.map",
     "static/js/2.172a2927.chunk.js": "/react-CryptoMarket/static/js/2.172a2927.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.701889b2.js",
     "static/js/2.172a2927.chunk.js",
     "static/css/main.7e2272e6.chunk.css",
-    "static/js/main.be2170de.chunk.js"
+    "static/js/main.6a3e3115.chunk.js"
   ]
 }
