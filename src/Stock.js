@@ -22,28 +22,28 @@ class Stock extends React.Component {
             stockChartX2: [],
             stockChartY2: [],
         }
-        this.stock = stockArr[stockView];
+        this.stock = stockArr[0];
+        console.log(this.stock)
+
         this.setStock = this.setStock.bind(this);
     }
 
     setStock() {
         stockView++;
-
+        
         if(stockView > 4) {
             stockView = 0;
         }
-        console.log('clicked');
         this.setState({stock: stockArr[stockView]});
+        
     }
 
     fetchStock() {
-        console.log('runnnin2')
-
-
+        console.log(this.stock);
         const pointThis = this;
         const API_KEY = 'EHM4W2PU9UBUEZZ2';
 
-
+       
         let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${this.stock}&outputsize=compact&apikey=${API_KEY}`;
 
         let stockChartXValuesFunction = [];
@@ -128,15 +128,12 @@ class Stock extends React.Component {
                         }
                     );
 
-                    //console.log(stockChartXValuesFunction);
                 }
             )
 
 
     }
 
-    //this.state.stockChartYValues
-    //this.state.stockChartY2
     render() {
         return (
             <div> Stock
@@ -144,14 +141,14 @@ class Stock extends React.Component {
 
                 <div id="stockGraph">
                     <h1> Stocnks </h1>
-                    <Button  onClick = {this.setState}/>
+                    <Button  onClick = {this.setStock} />
 
 
                     <Line
                         data={{
                             labels: this.state.stockChartXValues,
                             datasets: [{
-                                label: this.stock,
+                                label: this.state.stock,
                                 data: this.state.stockChartYValues,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
@@ -213,8 +210,6 @@ class Stock extends React.Component {
     componentDidMount() {
         this.fetchStock();
         this.fetchStock2();
-
-        
     }
 }
 
