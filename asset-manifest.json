@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/react-CryptoMarket/static/css/main.4e190845.chunk.css",
-    "main.js": "/react-CryptoMarket/static/js/main.6bb2ad2e.chunk.js",
-    "main.js.map": "/react-CryptoMarket/static/js/main.6bb2ad2e.chunk.js.map",
-    "runtime-main.js": "/react-CryptoMarket/static/js/runtime-main.b1560af1.js",
-    "runtime-main.js.map": "/react-CryptoMarket/static/js/runtime-main.b1560af1.js.map",
-    "static/js/2.76e2f04b.chunk.js": "/react-CryptoMarket/static/js/2.76e2f04b.chunk.js",
-    "static/js/2.76e2f04b.chunk.js.map": "/react-CryptoMarket/static/js/2.76e2f04b.chunk.js.map",
-    "static/js/3.6ce146c1.chunk.js": "/react-CryptoMarket/static/js/3.6ce146c1.chunk.js",
-    "static/js/3.6ce146c1.chunk.js.map": "/react-CryptoMarket/static/js/3.6ce146c1.chunk.js.map",
+    "main.css": "/react-CryptoMarket/static/css/main.61e5d45a.chunk.css",
+    "main.js": "/react-CryptoMarket/static/js/main.eb6611cc.chunk.js",
+    "main.js.map": "/react-CryptoMarket/static/js/main.eb6611cc.chunk.js.map",
+    "runtime-main.js": "/react-CryptoMarket/static/js/runtime-main.e08f7680.js",
+    "runtime-main.js.map": "/react-CryptoMarket/static/js/runtime-main.e08f7680.js.map",
+    "static/js/2.0b7a9edb.chunk.js": "/react-CryptoMarket/static/js/2.0b7a9edb.chunk.js",
+    "static/js/2.0b7a9edb.chunk.js.map": "/react-CryptoMarket/static/js/2.0b7a9edb.chunk.js.map",
+    "static/js/3.cc72f6c3.chunk.js": "/react-CryptoMarket/static/js/3.cc72f6c3.chunk.js",
+    "static/js/3.cc72f6c3.chunk.js.map": "/react-CryptoMarket/static/js/3.cc72f6c3.chunk.js.map",
     "index.html": "/react-CryptoMarket/index.html",
-    "static/css/main.4e190845.chunk.css.map": "/react-CryptoMarket/static/css/main.4e190845.chunk.css.map",
-    "static/js/2.76e2f04b.chunk.js.LICENSE.txt": "/react-CryptoMarket/static/js/2.76e2f04b.chunk.js.LICENSE.txt"
+    "static/css/main.61e5d45a.chunk.css.map": "/react-CryptoMarket/static/css/main.61e5d45a.chunk.css.map",
+    "static/js/2.0b7a9edb.chunk.js.LICENSE.txt": "/react-CryptoMarket/static/js/2.0b7a9edb.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b1560af1.js",
-    "static/js/2.76e2f04b.chunk.js",
-    "static/css/main.4e190845.chunk.css",
-    "static/js/main.6bb2ad2e.chunk.js"
+    "static/js/runtime-main.e08f7680.js",
+    "static/js/2.0b7a9edb.chunk.js",
+    "static/css/main.61e5d45a.chunk.css",
+    "static/js/main.eb6611cc.chunk.js"
   ]
 }
