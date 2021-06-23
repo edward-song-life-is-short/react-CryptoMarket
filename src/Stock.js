@@ -1,16 +1,17 @@
 import React from 'react';
 import "./Stock.css"
-
+import Button from './SmallComponents/button.js'
 
 import { Line } from 'react-chartjs-2'
 
-let StockSymbol = 'TSLA';
 let StockSymbol2 = 'MSFT';
 
 let counter1 = 0;
 let counter2 = 0;
 
+let stockArr = ['FB', 'MSFT', 'IBM', 'TSLA', 'AMZN'];
 
+let stockView = 0;
 
 class Stock extends React.Component {
     constructor(props) {
@@ -19,13 +20,20 @@ class Stock extends React.Component {
             stockChartXValues: [],
             stockChartYValues: [],
             stockChartX2: [],
-            stockChartY2: []
+            stockChartY2: [],
         }
+        this.stock = stockArr[stockView];
+        this.setStock = this.setStock.bind(this);
     }
 
-    componentDidMount() {
-        this.fetchStock();
-        this.fetchStock2();
+    setStock() {
+        stockView++;
+
+        if(stockView > 4) {
+            stockView = 0;
+        }
+        console.log('clicked');
+        this.setState({stock: stockArr[stockView]});
     }
 
     fetchStock() {
@@ -36,7 +44,7 @@ class Stock extends React.Component {
         const API_KEY = 'EHM4W2PU9UBUEZZ2';
 
 
-        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${StockSymbol}&outputsize=compact&apikey=${API_KEY}`;
+        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${this.stock}&outputsize=compact&apikey=${API_KEY}`;
 
         let stockChartXValuesFunction = [];
         let stockChartYValuesFunction = [];
@@ -127,28 +135,23 @@ class Stock extends React.Component {
 
     }
 
-    clicked() {
-        console.log('click');
-        StockSymbol2 = 'AMZN';
-        this.fetchStock2();
-
-    }
-
     //this.state.stockChartYValues
     //this.state.stockChartY2
     render() {
         return (
             <div> Stock
-                <button onClick={(e) => { e.preventDefault(); this.clicked(); }} > The Button </button>
+                {/* <button onClick={(e) => { e.preventDefault(); this.clicked(); }} > The Button </button> */}
 
                 <div id="stockGraph">
                     <h1> Stocnks </h1>
-                    
+                    <Button  onClick = {this.setState}/>
+
+
                     <Line
                         data={{
                             labels: this.state.stockChartXValues,
                             datasets: [{
-                                label: StockSymbol,
+                                label: this.stock,
                                 data: this.state.stockChartYValues,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
@@ -206,7 +209,15 @@ class Stock extends React.Component {
             </div>
         )
     }
+
+    componentDidMount() {
+        this.fetchStock();
+        this.fetchStock2();
+
+        
+    }
 }
+
 
 
 export default Stock;
