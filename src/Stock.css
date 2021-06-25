@@ -4,9 +4,11 @@
     margin-right: auto;
     width: 80%;
     height: 60%;
-    
-    left: 25%;
-    top:25%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
 };
 
 #test {

@@ -1,16 +1,20 @@
 import React from 'react';
 import "./Stock.css"
-
+import Button from './SmallComponents/button.js'
 
 import { Line } from 'react-chartjs-2'
 
-let StockSymbol = 'TSLA';
 let StockSymbol2 = 'MSFT';
 
 let counter1 = 0;
 let counter2 = 0;
 
+let stockArr = ['FB', 'MSFT', 'IBM', 'TSLA', 'AMZN'];
 
+let stockSymbol = stockArr[0];
+
+let stockView = 0;
+let prevState = 0;
 
 class Stock extends React.Component {
     constructor(props) {
@@ -19,24 +23,37 @@ class Stock extends React.Component {
             stockChartXValues: [],
             stockChartYValues: [],
             stockChartX2: [],
-            stockChartY2: []
+            stockChartY2: [],
         }
+        this.stock = stockArr[0];
+   
+
+        this.setStock = this.setStock.bind(this);
+        this.fetchStock = this.fetchStock.bind(this);
     }
 
-    componentDidMount() {
+    setStock() {
+        prevState = stockView;
+        
+        //this.setState({stock: stockArr[stockView]});
+        stockSymbol = stockArr[stockView];
+        stockView++;
         this.fetchStock();
-        this.fetchStock2();
+        
+        if(stockView > 4) {
+            stockView = 0;
+        }
+        
     }
 
     fetchStock() {
-        console.log('runnnin2')
-
-
+        console.log('fetch:')
+        console.log(this.stock);
         const pointThis = this;
         const API_KEY = 'EHM4W2PU9UBUEZZ2';
 
-
-        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${StockSymbol}&outputsize=compact&apikey=${API_KEY}`;
+       
+        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbol}&outputsize=compact&apikey=${API_KEY}`;
 
         let stockChartXValuesFunction = [];
         let stockChartYValuesFunction = [];
@@ -50,7 +67,8 @@ class Stock extends React.Component {
             .then(
                 function (data) {
                     console.log(data);
-
+                    
+                    counter1 = 0;
                     for (var key in data['Time Series (Daily)']) {
                         stockChartXValuesFunction.push(key);
                         stockChartYValuesFunction.push(data['Time Series (Daily)'][key]['1. open']);
@@ -120,35 +138,27 @@ class Stock extends React.Component {
                         }
                     );
 
-                    //console.log(stockChartXValuesFunction);
                 }
             )
 
 
     }
 
-    clicked() {
-        console.log('click');
-        StockSymbol2 = 'AMZN';
-        this.fetchStock2();
-
-    }
-
-    //this.state.stockChartYValues
-    //this.state.stockChartY2
     render() {
         return (
             <div> Stock
-                <button onClick={(e) => { e.preventDefault(); this.clicked(); }} > The Button </button>
+                {/* <button onClick={(e) => { e.preventDefault(); this.clicked(); }} > The Button </button> */}
 
                 <div id="stockGraph">
-                    <h1> Stocnks </h1>
+                    <h1> </h1>
+                    <Button  stock = {stockSymbol} onClick = {this.setStock} />
                     
+
                     <Line
                         data={{
                             labels: this.state.stockChartXValues,
                             datasets: [{
-                                label: StockSymbol,
+                                label: stockSymbol,
                                 data: this.state.stockChartYValues,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
@@ -196,7 +206,8 @@ class Stock extends React.Component {
 
                         options={{
                             responsive: true,
-                            maintainAspectRatio: true
+                            maintainAspectRatio: true,
+                            boxHeight: 200
 
                         }}
 
@@ -206,7 +217,14 @@ class Stock extends React.Component {
             </div>
         )
     }
+
+    componentDidMount() {
+        this.fetchStock();
+        //this.fetchStock2();
+        //this.setStock();
+    }
 }
+
 
 
 export default Stock;
