@@ -8,7 +8,6 @@ function App() {
   return (
     <div className="App">
       <Timers />
-      <h1> stfonks </h1>
         <Stock> </Stock>
         
     </div>

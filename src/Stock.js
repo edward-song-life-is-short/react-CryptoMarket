@@ -11,7 +11,10 @@ let counter2 = 0;
 
 let stockArr = ['FB', 'MSFT', 'IBM', 'TSLA', 'AMZN'];
 
+let stockSymbol = stockArr[0];
+
 let stockView = 0;
+let prevState = 0;
 
 class Stock extends React.Component {
     constructor(props) {
@@ -23,28 +26,34 @@ class Stock extends React.Component {
             stockChartY2: [],
         }
         this.stock = stockArr[0];
-        console.log(this.stock)
+   
 
         this.setStock = this.setStock.bind(this);
+        this.fetchStock = this.fetchStock.bind(this);
     }
 
     setStock() {
+        prevState = stockView;
+        
+        //this.setState({stock: stockArr[stockView]});
+        stockSymbol = stockArr[stockView];
         stockView++;
+        this.fetchStock();
         
         if(stockView > 4) {
             stockView = 0;
         }
-        this.setState({stock: stockArr[stockView]});
         
     }
 
     fetchStock() {
+        console.log('fetch:')
         console.log(this.stock);
         const pointThis = this;
         const API_KEY = 'EHM4W2PU9UBUEZZ2';
 
        
-        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${this.stock}&outputsize=compact&apikey=${API_KEY}`;
+        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbol}&outputsize=compact&apikey=${API_KEY}`;
 
         let stockChartXValuesFunction = [];
         let stockChartYValuesFunction = [];
@@ -58,7 +67,8 @@ class Stock extends React.Component {
             .then(
                 function (data) {
                     console.log(data);
-
+                    
+                    counter1 = 0;
                     for (var key in data['Time Series (Daily)']) {
                         stockChartXValuesFunction.push(key);
                         stockChartYValuesFunction.push(data['Time Series (Daily)'][key]['1. open']);
@@ -140,15 +150,15 @@ class Stock extends React.Component {
                 {/* <button onClick={(e) => { e.preventDefault(); this.clicked(); }} > The Button </button> */}
 
                 <div id="stockGraph">
-                    <h1> Stocnks </h1>
-                    <Button  onClick = {this.setStock} />
-
+                    <h1> </h1>
+                    <Button  stock = {stockSymbol} onClick = {this.setStock} />
+                    
 
                     <Line
                         data={{
                             labels: this.state.stockChartXValues,
                             datasets: [{
-                                label: this.state.stock,
+                                label: stockSymbol,
                                 data: this.state.stockChartYValues,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
@@ -196,7 +206,8 @@ class Stock extends React.Component {
 
                         options={{
                             responsive: true,
-                            maintainAspectRatio: true
+                            maintainAspectRatio: true,
+                            boxHeight: 200
 
                         }}
 
@@ -209,7 +220,8 @@ class Stock extends React.Component {
 
     componentDidMount() {
         this.fetchStock();
-        this.fetchStock2();
+        //this.fetchStock2();
+        //this.setStock();
     }
 }
 

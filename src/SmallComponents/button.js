@@ -11,9 +11,9 @@ class Button extends React.Component {
     
     render() {   
         return (
-           <div>
+           <div className = "container">
 
-            <button onClick = {this.props.onClick} > Button </button>
+            <button onClick = {this.props.onClick} className = "btn-grad"> {this.props.stock} </button>
              
           </div>
           
