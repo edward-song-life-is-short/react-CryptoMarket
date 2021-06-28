@@ -1,6 +1,6 @@
-import React from 'react';
 import "./Stock.css"
 import Button from './SmallComponents/button.js'
+import React from 'react';
 
 import { Line } from 'react-chartjs-2'
 
@@ -15,7 +15,6 @@ let stockArr = ['FB', 'AAPL', 'IBM', 'TSLA', 'AMZN'];
 let stockSymbol = stockArr[0];
 
 let stockView = 0;
-let prevState = 0;
 
 class Stock extends React.Component {
     constructor(props) {
@@ -33,8 +32,12 @@ class Stock extends React.Component {
         this.fetchStock = this.fetchStock.bind(this);
     }
 
+    setStockState(name) {
+        stockSymbol = name;
+        this.fetchStock();
+    }
+
     setStock() {
-        prevState = stockView;
         
         stockSymbol = stockArr[stockView];
         
@@ -139,8 +142,6 @@ class Stock extends React.Component {
 
                 }
             )
-
-
     }
 
     render() {
@@ -148,9 +149,19 @@ class Stock extends React.Component {
             <div> Stock
                 {/* <button onClick={(e) => { e.preventDefault(); this.clicked(); }} > The Button </button> */}
 
+                {stockArr.map((stock) => (
+                        <button
+                            onClick ={()=> this.setStockState(stock)} 
+                            key = {stock}
+                        >
+                            {stock}
+                        </button>
+                    ))}
+
                 <div id="stockGraph">
                     <h1> </h1>
                     <Button  stock = {stockSymbol} onClick = {this.setStock} />
+                    
                     
 
                     <Line
