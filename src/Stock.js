@@ -8,8 +8,9 @@ let StockSymbol2 = 'MSFT';
 
 let counter1 = 0;
 let counter2 = 0;
+let days = 10;
 
-let stockArr = ['FB', 'MSFT', 'IBM', 'TSLA', 'AMZN'];
+let stockArr = ['FB', 'AAPL', 'IBM', 'TSLA', 'AMZN'];
 
 let stockSymbol = stockArr[0];
 
@@ -35,9 +36,8 @@ class Stock extends React.Component {
     setStock() {
         prevState = stockView;
         
-        //this.setState({stock: stockArr[stockView]});
         stockSymbol = stockArr[stockView];
-        stockView++;
+        
         this.fetchStock();
         
         if(stockView > 4) {
@@ -47,12 +47,11 @@ class Stock extends React.Component {
     }
 
     fetchStock() {
+        stockView++;
         console.log('fetch:')
-        console.log(this.stock);
         const pointThis = this;
         const API_KEY = 'EHM4W2PU9UBUEZZ2';
-
-       
+        
         let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbol}&outputsize=compact&apikey=${API_KEY}`;
 
         let stockChartXValuesFunction = [];
@@ -75,7 +74,7 @@ class Stock extends React.Component {
 
                         counter1++;
 
-                        if (counter1 > 20) {
+                        if (counter1 > days) {
                             break;
                         }
 
