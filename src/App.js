@@ -19,13 +19,13 @@ function App() {
           <Navigation />
             <Switch>
              <Route path = '/' exact component = {Home} />
-             <Route path="/stockPage" component={Stonks} exact/>
+             <Route path="/stockPage" component={Stonks} />
              <Route path="/cryptoPage" component={Crypto}/>
              
            </Switch>
         </div> 
       </Router>
-
+      {/* <img src= {require('./img/logo.svg')} alt='logfo' /> */}
     </div>
   );
 }
