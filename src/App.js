@@ -1,12 +1,12 @@
 import './App.css';
 import React from 'react';
 
-import Stonks from './StockSetUp/stockPage';
+import Stonks from './pages/stockPage';
 import Crypto from './StockSetUp/crypto';
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Navigation from './SmallComponents/nav';
+import Navigation from './navBar/nav';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
           <Navigation />
             <Switch>
              <Route path="/" component={Stonks} exact/>
-             <Route path="/StockSetUp/crypto.js" component={Crypto}/>
+             <Route path="/cryptoPage" component={Crypto}/>
              
            </Switch>
         </div> 

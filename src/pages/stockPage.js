@@ -6,7 +6,7 @@ function Stonks() {
 
     return (
       <div>
-        <Timers />
+        {/*  <Timers /> */}
         <Stock> </Stock>
         {/* <button onClick="location.href ='https://google.com';">fdsf</button> */}
   
