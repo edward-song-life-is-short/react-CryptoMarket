@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from './navBar/nav';
 
+import Home from './pages';
+
 function App() {
 
   return (
@@ -16,7 +18,8 @@ function App() {
         <div>
           <Navigation />
             <Switch>
-             <Route path="/" component={Stonks} exact/>
+             <Route path = '/' exact component = {Home} />
+             <Route path="/stockPage" component={Stonks} exact/>
              <Route path="/cryptoPage" component={Crypto}/>
              
            </Switch>
