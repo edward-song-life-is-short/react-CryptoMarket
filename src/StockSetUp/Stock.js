@@ -1,7 +1,9 @@
 import "./Stock.css"
 import Button from '../SmallComponents/button.js'
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import Timers from "../SmallComponents/timer";
 import { Line } from 'react-chartjs-2'
 
 let StockSymbol2 = 'MSFT';
@@ -146,8 +148,10 @@ class Stock extends React.Component {
 
     render() {
         return (
-            <div> Stock
+            
+            <div id = "main"> Stock
                 {/* <button onClick={(e) => { e.preventDefault(); this.clicked(); }} > The Button </button> */}
+                
 
                 {stockArr.map((stock) => (
                         <button
@@ -224,6 +228,12 @@ class Stock extends React.Component {
                     />
 
                 </div>
+                
+                <Router>
+                    {/* <Link to="/crypto.html">Topics</Link>
+                    <Route path="/crypto.html" component={crypto} /> */}
+                </Router>
+
             </div>
         )
     }

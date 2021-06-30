@@ -1,15 +1,28 @@
 import './App.css';
-import Stock from './StockSetUp/Stock'
 import React from 'react';
-import Timers from './SmallComponents/timer.js'
+
+import Stonks from './StockSetUp/stockPage';
+import Crypto from './StockSetUp/crypto';
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Navigation from './SmallComponents/nav';
 
 function App() {
-  
+
   return (
     <div className="App">
-      <Timers />
-        <Stock> </Stock>
-        
+      <Router>
+        <div>
+          <Navigation />
+            <Switch>
+             <Route path="/" component={Stonks} exact/>
+             <Route path="/StockSetUp/crypto.js" component={Crypto}/>
+             
+           </Switch>
+        </div> 
+      </Router>
+
     </div>
   );
 }
