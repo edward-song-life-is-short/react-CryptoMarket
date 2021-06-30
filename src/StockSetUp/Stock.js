@@ -1,5 +1,5 @@
 import "./Stock.css"
-import Button from './SmallComponents/button.js'
+import Button from '../SmallComponents/button.js'
 import React from 'react';
 
 import { Line } from 'react-chartjs-2'

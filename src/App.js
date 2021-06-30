@@ -1,5 +1,5 @@
 import './App.css';
-import Stock from './Stock'
+import Stock from './StockSetUp/Stock'
 import React from 'react';
 import Timers from './SmallComponents/timer.js'
 
