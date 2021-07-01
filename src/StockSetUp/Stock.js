@@ -1,9 +1,8 @@
 import "./Stock.css"
-import Button from '../SmallComponents/button.js'
+import Button from '../components/small/button.js'
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import Timers from "../SmallComponents/timer";
 import { Line } from 'react-chartjs-2'
 
 let StockSymbol2 = 'MSFT';
