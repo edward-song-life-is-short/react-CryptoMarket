@@ -3,14 +3,15 @@ import { Items } from './items'
 import './drop.css'
 import { Link } from 'react-router-dom'
 
-function Drop() {
+function Drop(props) {
     const [click, setClick] = useState(false)
 
     const handleClick = () => setClick(!click)
     
     return(
         <> 
-            <ul onClick ={handleClick} className = {click ? 'dropdown-menu clicked' : 'dropdown-menu'}>
+            <ul  onClick={props.onCloseMobileMenu}
+        className={click ? 'dropdown-menu clicked' : 'dropdown-menu'}>
                 {Items.map((item, index) =>  {
                     return(
                         <li key = {index}>

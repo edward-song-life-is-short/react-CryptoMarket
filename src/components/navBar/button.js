@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 export function Button() {
     return(
-        <Link to='log-in'>
+        <Link to='/login'>
             <button className = 'buttonBoi'> Log in </button>
         </Link>
     );

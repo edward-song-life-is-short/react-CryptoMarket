@@ -12,8 +12,12 @@ function Navigation() {
 
     const closeMobileMenu = () => setClick(false);
 
+    const extendElement = () => {
+        drop ? setDrop(false) : setDrop(true);
+    }
+
     const onMouseEnter = () => {
-        if(window.innerWidth < 960) {
+        if (window.innerWidth < 960) {
             setDrop(false);
         } else {
             setDrop(true);
@@ -21,18 +25,18 @@ function Navigation() {
     };
 
     const onMouseLeave = () => {
-        if(window.innerWidth < 960) {
+        if (window.innerWidth < 960) {
             setDrop(false);
         } else {
             setDrop(false);
         }
     };
-    
+
 
     return (
         <>
             <nav className='navbar'>
-                <Link to='/' className='navbar-logo' onClick = {closeMobileMenu}>
+                <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                     Logo
                     <i class='fab fa-firstdraft' />
                 </Link>
@@ -60,18 +64,24 @@ function Navigation() {
                         </Link>
                     </li>
 
-                    <li className='nav-item' onMouseEnter={onMouseEnter} onMouseLeave = {onMouseLeave}>
-                        <Link to='/account' className='nav-links' onClick={closeMobileMenu}>
-                            Account 
-                            <i className='fas fa-caret-down' /> 
+                    <li className='nav-item' onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+                        <Link to='/account' className='nav-links' onClick={extendElement}>
+                            Account
+                            <i className='fas fa-caret-down' />
                         </Link>
 
-                        {drop && <Drop />}
+                        {drop && <Drop onCloseMobileMenu={closeMobileMenu} />}
                     </li>
 
                     <li className='nav-item'>
                         <Link to='/contact-me' className='nav-links' onClick={closeMobileMenu}>
                             Contact Me
+                        </Link>
+                    </li>
+
+                    <li>
+                        <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu}>
+                            Login
                         </Link>
                     </li>
                 </ul>
