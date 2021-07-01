@@ -12,6 +12,23 @@ function Navigation() {
 
     const closeMobileMenu = () => setClick(false);
 
+    const onMouseEnter = () => {
+        if(window.innerWidth < 960) {
+            setDrop(false);
+        } else {
+            setDrop(true);
+        }
+    };
+
+    const onMouseLeave = () => {
+        if(window.innerWidth < 960) {
+            setDrop(false);
+        } else {
+            setDrop(false);
+        }
+    };
+    
+
     return (
         <>
             <nav className='navbar'>
@@ -25,7 +42,7 @@ function Navigation() {
                 </div>
 
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                    <li className='nav-item'>
+                    <li className='nav-item' >
                         <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                             Home
                         </Link>
@@ -43,14 +60,20 @@ function Navigation() {
                         </Link>
                     </li>
 
-                    <li className='nav-item'>
+                    <li className='nav-item' onMouseEnter={onMouseEnter} onMouseLeave = {onMouseLeave}>
                         <Link to='/account' className='nav-links' onClick={closeMobileMenu}>
-                            Account <i className='fas fa-caret-down' />
+                            Account 
+                            <i className='fas fa-caret-down' /> 
                         </Link>
 
                         {drop && <Drop />}
                     </li>
 
+                    <li className='nav-item'>
+                        <Link to='/contact-me' className='nav-links' onClick={closeMobileMenu}>
+                            Contact Me
+                        </Link>
+                    </li>
                 </ul>
                 <Button />
             </nav>

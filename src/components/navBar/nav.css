@@ -55,10 +55,6 @@
     transition: all 0.2s ease-out;
   }
   
-  .fa-bars {
-    color: #fff;
-  }
-  
   .nav-links-mobile {
     display: none;
   }

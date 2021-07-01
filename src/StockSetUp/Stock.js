@@ -86,8 +86,8 @@ class Stock extends React.Component {
 
                     pointThis.setState(
                         {
-                            stockChartXValues: stockChartXValuesFunction,
-                            stockChartYValues: stockChartYValuesFunction
+                            stockChartXValues: stockChartXValuesFunction.reverse(),
+                            stockChartYValues: stockChartYValuesFunction.reverse()
                         }
                     );
 
@@ -128,7 +128,7 @@ class Stock extends React.Component {
 
                         counter2++;
 
-                        if (counter2 > 20) {
+                        if (counter2 > 100) {
                             break;
                         }
 
@@ -159,8 +159,6 @@ class Stock extends React.Component {
                     </button>
                 ))}
                 <Button stock={stockSymbol} onClick={this.setStock} />
-
-
 
                 <Line
                     data={{
