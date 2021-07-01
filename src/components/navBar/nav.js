@@ -38,7 +38,7 @@ function Navigation() {
             <nav className='navbar'>
                 <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                     Logo
-                    <i class='fab fa-firstdraft' />
+                    <i className='fab fa-firstdraft' />
                 </Link>
 
                 <div className='main-icon' onClick={handleClick}>
