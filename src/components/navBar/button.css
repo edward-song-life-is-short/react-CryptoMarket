@@ -1,0 +1,21 @@
+:root {
+    --primary: #1888ff;
+}
+
+.buttonBoi {
+    padding: 8px 20px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    background-color: var(--primary);
+}
+
+.buttonBoi:hover {
+    padding: 6px 18px;
+    transition: all 0.5s ease-out;
+    background-color: transparent;
+    border: 2px solid var(--primary);
+}
