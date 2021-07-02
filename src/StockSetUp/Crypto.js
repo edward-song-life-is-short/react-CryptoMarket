@@ -1,129 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './crypto';
+import axios from 'axios';
+import Coin from './Coin';
 
-import { Line } from 'react-chartjs-2';
+// https://api.coingecko.com/api/v3/coins/bitcoin/history?date=01-01-2020
 
-const request = require('request');
+//api link for 100 coins
+//https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad&order=market_cap_desc&per_page=100&page=1&sparkline=false
+function Crypto() {
+    const [coins, setCoins] = useState([])
+    const [search, setSearch] = useState('')
 
-const options = {
-  method: 'POST',
-  url: 'https://community-coinbase.p.rapidapi.com/',
-  qs: {api_key: 'undefined'},
-  headers: {
-    'x-rapidapi-key': 'd55e99fce5msh4da44a63e54bfc6p1a1e68jsnc97bf1830acb',
-    'x-rapidapi-host': 'community-coinbase.p.rapidapi.com',
-    useQueryString: true
-  }
-};
+    useEffect(() => {
+        axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=cad&order=market_cap_desc&per_page=100&page=1&sparkline=false')
 
-request(options, function (error, response, body) {
-	if (error) throw new Error(error);
+            .then(res => {
+                setCoins(res.data);
+                console.log(res.data);
+            }).catch(error => console.log(error))
+    }, []);
 
-	console.log(body);
-});
-
-class Crypto extends React.Component {
-    
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            stockChartXValues: [],
-            stockChartYValues: [],
-            stockChartX2: [],
-            stockChartY2: [],
-        }
+    const handleChange = e => {
+        setSearch(e.target.value)
     }
 
-    fetchStock() {
-        const pointThis = this;
-        const API_KEY = '9b58fd5a-f81e-4b2d-84e8-4b68eeeae5d2';
-        let stockSymbol = 'MSFT';
+    const filteredCoins = coins.filter(coin =>
+        coin.name.toLowerCase().includes(search.toLowerCase())
 
-        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbol}&outputsize=compact&apikey=${API_KEY}`;
+    )
 
-        let stockChartXValuesFunction = [];
-        let stockChartYValuesFunction = [];
+    return (
+        <div className='coin-app'>
 
-        fetch(API_Call)
-            .then(
-                function (response) {
-                    return response.json();
-                }
-            )
-            .then(
-                function (data) {
-                    console.log(data);
+            <div className="coin-search">
+                <h1 className='coin-text'> Search currency: </h1>
 
-                    for (var key in data['Time Series (Daily)']) {
-                        stockChartXValuesFunction.push(key);
-                        stockChartYValuesFunction.push(data['Time Series (Daily)'][key]['1. open']);
-                    }
-
-                    pointThis.setState(
-                        {
-                            stockChartXValues: stockChartXValuesFunction.reverse(),
-                            stockChartYValues: stockChartYValuesFunction.reverse()
-                        }
-                    );
-
-                    //console.log(stockChartXValuesFunction);
-                }
-            )
-
-    }
-
-    render() {
-        return (
-
-            <div id="stockGraph">
-                <h1> Test</h1>
-
-                <Line
-                    data={{
-                        labels: this.state.stockChartXValues,
-                        datasets: [{
-                            label: 'test',
-                            data: this.state.stockChartYValues,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    }}
-
-                    options={{
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        boxHeight: 200
-
-                    }}
-
-                />
-
+                <form>
+                    <input type="text" className="coin-input" placeholder="Search"
+                        onChange={handleChange}>
+                    </input>
+                </form>
             </div>
+            {filteredCoins.map(coin => {
+                return (
+                    <Coin key={coin.id}
+                        name={coin.name}
+                        image={coin.image}
+                        symbol={coin.symbol}
+                        marketcap={coin.market_cap}
+                        price={coin.current_price}
+                        priceChange={coin.price_change_percentage_24h}
+                        volume={coin.total_volume}
+                    />
+                )
+            })}
+        </div>
+    );
 
-        )
-    }
-
-    componentDidMount() {
-        this.fetchStock();
-        //this.fetchStock2();
-        //this.setStock();
-    }
 }
 
 export default Crypto;

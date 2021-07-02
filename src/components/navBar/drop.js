@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom'
 
 function Drop(props) {
     const [click, setClick] = useState(false)
-
-    const handleClick = () => setClick(!click)
-    
+ 
     return(
         <> 
             <ul  onClick={props.onCloseMobileMenu}
@@ -17,6 +15,7 @@ function Drop(props) {
                         <li key = {index}>
                             <Link className = {item.cName} to = {item.path}> 
                                 {item.title}
+
                             </Link>
                         </li>
                     );

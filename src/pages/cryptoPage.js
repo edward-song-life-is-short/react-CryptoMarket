@@ -1,14 +1,16 @@
 import React from 'react';
 import Crypto from '../StockSetUp/crypto';
+import StockToggle  from '../StockSetUp/stockToggle';
 
-function cryptoPage() {
+function CryptoPage() {
 
     return (
       <div>
+          <StockToggle> </StockToggle>          
           <Crypto> </Crypto>
       </div>
     );
   }
   
-  export default cryptoPage;
+  export default CryptoPage;
   

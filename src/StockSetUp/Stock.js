@@ -1,7 +1,6 @@
 import "./Stock.css"
 import Button from '../components/small/button.js'
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import { Line } from 'react-chartjs-2'
 

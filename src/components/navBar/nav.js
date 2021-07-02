@@ -29,6 +29,7 @@ function Navigation() {
             setDrop(false);
         } else {
             setDrop(false);
+            console.log(drop);
         }
     };
 
@@ -65,9 +66,11 @@ function Navigation() {
                     </li>
 
                     <li className='nav-item' onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                        <Link to='/account' className='nav-links' onClick={extendElement}>
+                        <Link to='/account' className='nav-links' onClick={extendElement} >
                             Account
+                            
                             <i className='fas fa-caret-down' />
+                            
                         </Link>
 
                         {drop && <Drop onCloseMobileMenu={closeMobileMenu} />}
