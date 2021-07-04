@@ -35,12 +35,15 @@ function Crypto() {
             <div className="coin-search">
                 <h1 className='coin-text'> Search currency: </h1>
 
-                <form>
-                    <input type="text" className="coin-input" placeholder="Search"
-                        onChange={handleChange}>
-                    </input>
-                </form>
+                <label className="field field_v1">
+                    <input className="field__input" STYLE="color: #ffffff;" placeholder="e.g bitcoin" onChange={handleChange} />
+                    <span className="field__label-wrap">
+                        <span className="field__label"> Type the Coin Name </span>
+                    </span>
+                </label>
+
             </div>
+
             {filteredCoins.map(coin => {
                 return (
                     <Coin key={coin.id}
