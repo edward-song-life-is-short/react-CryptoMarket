@@ -14,7 +14,7 @@ function Drop(props) {
                     return(
                         <li key = {index}>
                             <Link className = {item.cName} to = {item.path}> 
-                                {item.title}
+                                {item.title} 
 
                             </Link>
                         </li>

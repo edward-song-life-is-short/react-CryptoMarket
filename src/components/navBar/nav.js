@@ -49,28 +49,28 @@ function Navigation() {
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li className='nav-item' >
                         <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                            Home
+                            <p className="hover-underline-animation"> Home </p>
                         </Link>
                     </li>
 
                     <li className='nav-item'>
                         <Link to='/cryptoPage' className='nav-links' onClick={closeMobileMenu}>
-                            Crypto
+                            <p className="hover-underline-animation"> Crypto </p>
                         </Link>
                     </li>
 
                     <li className='nav-item'>
                         <Link to='/stockPage' className='nav-links' onClick={closeMobileMenu}>
-                            Stock
+                            <p className="hover-underline-animation"> Stock </p>
                         </Link>
                     </li>
 
                     <li className='nav-item' onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                         <Link to='/account' className='nav-links' onClick={extendElement} >
-                            Account
+                            <p className="hover-underline-animation"> Account <i className='fas fa-caret-down' /></p>
+
                             
-                            <i className='fas fa-caret-down' />
-                            
+
                         </Link>
 
                         {drop && <Drop onCloseMobileMenu={closeMobileMenu} />}
@@ -78,7 +78,7 @@ function Navigation() {
 
                     <li className='nav-item'>
                         <Link to='/contact-me' className='nav-links' onClick={closeMobileMenu}>
-                            Contact Me
+                            <p className ="hover-underline-animation"> Contact Me </p>
                         </Link>
                     </li>
 

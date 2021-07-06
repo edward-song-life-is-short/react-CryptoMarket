@@ -1,5 +1,5 @@
 :root {
-    --primary: #1888ff;
+    --primary: #ff6384;
 }
 
 .buttonBoi {
@@ -11,6 +11,7 @@
     color: #fff;
     cursor: pointer;
     background-color: var(--primary);
+    
 }
 
 .buttonBoi:hover {
@@ -19,3 +20,5 @@
     background-color: transparent;
     border: 2px solid var(--primary);
 }
+
+
