@@ -52,7 +52,7 @@ class Stock extends React.Component {
         const pointThis = this;
         const API_KEY = 'EHM4W2PU9UBUEZZ2';
 
-        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbol}&outputsize=compact&apikey=${API_KEY}`;
+        let API_Call = `https://cors-anywhere.herokuapp.com/https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbol}&outputsize=compact&apikey=${API_KEY}`;
 
         let stockChartXValuesFunction = [];
         let stockChartYValuesFunction = [];

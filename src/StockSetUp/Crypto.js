@@ -33,7 +33,7 @@ function Crypto() {
         <div className='coin-app'>
 
             <div className="coin-search">
-                <h1 className='coin-text'> Search currency: </h1>
+                <div className = "coinPosition"> <h1 className='coin-text'> Search currency: </h1> </div>
 
                 <label className="field field_v1">
                     <input className="field__input" STYLE="color: #ffffff;" placeholder="e.g bitcoin" onChange={handleChange} />
