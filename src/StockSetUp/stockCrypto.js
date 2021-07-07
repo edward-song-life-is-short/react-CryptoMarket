@@ -8,11 +8,10 @@ import './stockCrypto.css'
 let recentDate = '', prevDate = '';
 
 let month, day, year;
-let setMonth, setDay, setYear;
+
+let daysAgo = 9, coin;
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-let coinSymbol = '';
 class StockCrypto extends React.Component {
     constructor(props) {
         super(props);
@@ -24,7 +23,7 @@ class StockCrypto extends React.Component {
             ten: false
         }
 
-        coinSymbol = 'BTC';
+        coin = 'bitcoin';
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -56,10 +55,11 @@ class StockCrypto extends React.Component {
         this.fetchStock();
     }
 
+    // let API_Call = `https://api.nomics.com/v1/currencies/sparkline?key=${nomicKey}&ids=${coinSymbol}&start=${prevDate}T00%3A00%3A00Z&end=${recentDate}T00%3A00%3A00Z`;
+
     fetchStock() {
         const pointThis = this;
-        const nomicKey = 'bdc9cfb03b3ce683c9095198ae87dc286bef0d36';
-        let API_Call = `https://api.nomics.com/v1/currencies/sparkline?key=${nomicKey}&ids=${coinSymbol}&start=${prevDate}T00%3A00%3A00Z&end=${recentDate}T00%3A00%3A00Z`;
+        let API_Call = `https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=cad&days=${daysAgo}&interval=daily`;
 
         let coinPriceY = [];
         let coinDateX = [];
@@ -75,12 +75,12 @@ class StockCrypto extends React.Component {
                     coinPriceY = [];
                     coinDateX = [];
 
-                    console.log(this);
+                    console.log(data);
 
-                    for (let i = 0; i < data[0]['prices'].length; i++) {
-                        console.log('test');
-                        coinPriceY.push(data[0]['prices'][i]);
-                        coinDateX.push(data[0]['timestamps'][i]);
+
+                    for (let i = 0; i <= daysAgo; i++) {
+                        coinPriceY.push(data.prices[i][1]);
+                        coinDateX.push(data.market_caps[i][0]);
                     }
 
                     pointThis.setState(
@@ -93,36 +93,13 @@ class StockCrypto extends React.Component {
             )
     }
 
-    tenDays() {
-        var dates = new Date();
-
-        dates.setDate(dates.getDate() - 10);
-
-        let stringDates = dates.toString();
-
-        setMonth = stringDates.substring(4, 7);
-        setDay = stringDates.substring(8, 10);
-        setYear = stringDates.substring(11, 15)
-
-        console.log('run');
-        let monthIndex = months.findIndex(element => element === setMonth) + 1;
-
-        let strMonth;
-
-        monthIndex >= 10 ? strMonth = monthIndex.toString() : strMonth = '0' + monthIndex.toString();
-
-        prevDate = setYear + '-' + strMonth + '-' + setDay;
-        console.log(prevDate);
-        this.fetchStock();
-    }
-
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
 
     handleSubmit(event) {
         console.log(this.state.value);
-        coinSymbol = this.state.value;
+        coin = this.state.value;
         this.fetchStock();
         event.preventDefault();
 
@@ -196,8 +173,7 @@ class StockCrypto extends React.Component {
     }
 
     componentDidMount() {
-        this.getDate();
-        this.fetchStock();
+       this.fetchStock();
     }
 
 };
