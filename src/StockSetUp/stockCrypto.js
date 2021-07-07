@@ -1,5 +1,5 @@
 import React from 'react';
-import './crypto';
+import './Crypto';
 import { Line } from 'react-chartjs-2'
 import './stockCrypto.css'
 // https://api.coingecko.com/api/v3/coins/bitcoin/history?date=01-01-2020

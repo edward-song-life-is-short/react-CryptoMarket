@@ -1,5 +1,5 @@
 import React from 'react';
-import Crypto from '../StockSetUp/crypto';
+import Crypto from '../StockSetUp/Crypto';
 import StockToggle  from '../StockSetUp/stockToggle';
 
 function CryptoPage() {
