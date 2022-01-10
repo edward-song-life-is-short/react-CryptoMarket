@@ -3,7 +3,7 @@ import React from 'react';
 
 import Stonks from './pages/stockPage';
 import CryptoPage from './pages/cryptoPage';
-
+import graph from './StockSetUp/stockCrypto'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from './components/navBar/nav';
@@ -23,14 +23,14 @@ function App() {
       <Router>
           <Navigation />
             <Switch>
-             <Route path = '/' exact component = {Home} />
-             <Route path="/stockPage" component={Stonks} />
-             <Route path="/cryptoPage" component={CryptoPage}/>
-             <Route path="/accInfo" component={AccInfo}/>
-             <Route path="/contact-me" component={Contact}/>
-             <Route path="/editProfile" component={Profile}/>
-             <Route path="/login" component={Login}/>
-             <Route path='/account' component = {Account} />
+             <Route path = '/' exact component = {CryptoPage} />
+             {/* <Route path="/stockPage" component={Stonks} /> */}
+             <Route path="/cryptoPage" component={graph}/>
+             {/* <Route path="/accInfo" component={AccInfo}/> */}
+             {/* <Route path="/contact-me" component={Contact}/> */}
+             {/* <Route path="/editProfile" component={Profile}/> */}
+             {/* <Route path="/login" component={Login}/> */}
+             {/* <Route path='/account' component = {Account} /> */}
              <Route path = '/cryptoStock' component = {CryptoStockPage} />
            </Switch> 
       </Router>

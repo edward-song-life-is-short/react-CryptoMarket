@@ -5,9 +5,9 @@ import './stockCrypto.css'
 // https://api.coingecko.com/api/v3/coins/bitcoin/history?date=01-01-2020
 //https://api.nomics.com/v1/markets?key=your-key-here
 
-let recentDate = '', prevDate = '';
 
-let month, day, year;
+
+let recentDate = '', prevDate = '';
 
 let daysAgo = 9, coin;
 
@@ -30,33 +30,6 @@ class StockCrypto extends React.Component {
 
     }
 
-    getDate() {
-        var date = new Date().toDateString();
-
-        this.setState({ date: date });
-
-        month = new Date().getMonth() + 1;
-        day = new Date().getUTCDate()
-
-        let prevMonth = 0;
-
-        month === 1 ? prevMonth = 12 : prevMonth = month - 1;
-
-        day = day < 10 ? '0' + day.toString() : day.toString();
-        month = month < 10 ? '0' + month.toString() : month.toString();
-
-        year = new Date().getFullYear().toString();
-
-
-        recentDate = year + '-' + month + '-' + day;
-
-        prevMonth = prevMonth < 10 ? '0' + prevMonth.toString() : prevMonth.toString();
-        prevDate = year + '-' + prevMonth + '-' + day;
-        this.fetchStock();
-    }
-
-    // let API_Call = `https://api.nomics.com/v1/currencies/sparkline?key=${nomicKey}&ids=${coinSymbol}&start=${prevDate}T00%3A00%3A00Z&end=${recentDate}T00%3A00%3A00Z`;
-
     fetchStock() {
         const pointThis = this;
         let API_Call = `https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=cad&days=${daysAgo}&interval=daily`;
@@ -67,8 +40,13 @@ class StockCrypto extends React.Component {
         fetch(API_Call)
             .then(
                 function (response) {
-                    return response.json();
-                }
+                    if(!response.ok) {
+                        throw Error(response.statusText);
+                    }
+                    else {
+                        return response.json();
+                    }
+                } 
             )
             .then(
                 function (data) {
@@ -89,12 +67,29 @@ class StockCrypto extends React.Component {
                             yVal: coinPriceY
                         }
                     );
+
                 }
             )
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    getDates() {
+        let newDate = new Date()
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        
+        this.setState({date: new Date().toLocaleString()})
+
+        recentDate = year.toString() + '-' + month.toString() + '-' + date.toString();
+        console.log(recentDate)
     }
 
     handleChange(event) {
         this.setState({ value: event.target.value });
+        coin = event.target.value;
     }
 
     handleSubmit(event) {
@@ -105,32 +100,45 @@ class StockCrypto extends React.Component {
 
     }
 
+    tenDays() {
+        daysAgo = 9;
+        this.fetchStock();
+    }
+
+    month() {
+        daysAgo = 30;
+        this.fetchStock();
+    }
+
+    
+
     render() {
         return (
             <div>
 
-                <h1 className='coin-text'> Select the Coin You Want to View (BTC, ETH): </h1>
+                <h1 className='coin-text'> Select the Coin You Want to View (bitcoin, ethereum): </h1>
                 <br />
+
+                <h1 className="dates"> {daysAgo} days from {recentDate} </h1>
                 
-                <h1 className = "dates"> {recentDate} : {prevDate} </h1>
 
                 <br /> <br />
-               
+
                 <form onSubmit={this.handleSubmit}>
                     <label className="field field_v1">
-                    <input className="field__input" STYLE="color: #ffffff;" placeholder="e.g BTC"value={this.state.value} onChange={this.handleChange} />
-                    <span className="field__label-wrap">
-                        <span className="field__label"> Type the Coin </span>
-                    </span>
+                        <input className="field__input" STYLE="color: #ffffff;" placeholder="e.g BTC" value = {coin} onChange={this.handleChange} />
+                        <span className="field__label-wrap">
+                            <span className="field__label"> Type the Coin </span>
+                        </span>
 
-                    <input type="submit" name="go" value="Submit" id = "searchSubmit"/>
-                </label>
-                <br /> <br />
+                        <input type="submit" name="go" value="Submit" id="searchSubmit" />
+                    </label>
+                    <br /> <br />
 
                 </form>
 
                 <button onClick={() => this.tenDays()}> 10 Days </button>
-                <button onClick={() => this.getDate()} > One Month </button>
+                <button onClick={() => this.month()} > One Month </button>
 
 
 
@@ -173,7 +181,12 @@ class StockCrypto extends React.Component {
     }
 
     componentDidMount() {
-       this.fetchStock();
+        this.fetchStock();
+        this.getDates();
+
+        setInterval(this.getDates, 86400000);
+
+
     }
 
 };

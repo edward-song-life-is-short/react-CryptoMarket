@@ -4,9 +4,9 @@ function Home() {
 
     return (
         <div>
-            <h1> Home </h1>
+            <h1> Website Still in Development </h1>
         </div>
-    );
+    )
 }
 
 export default Home;
